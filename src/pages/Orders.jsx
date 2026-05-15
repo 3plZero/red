@@ -162,7 +162,7 @@ export default function Orders() {
                         ) : (
                           <span style={{fontSize: '0.9rem', color: '#666'}}>Qty: {item.quantity}</span>
                         )}
-                        <span style={{fontSize: '0.85rem', color: 'var(--primary-red)', fontWeight: '700'}}>₱{item.price.toFixed(2)} ea.</span>
+                        <span style={{fontSize: '0.85rem', color: 'var(--primary-red)', fontWeight: '700'}}>₱{item.price.toFixed(2)}</span>
                       </div>
                     </div>
                     <div style={{fontWeight: '700'}}>₱{(item.price * item.quantity).toFixed(2)}</div>
