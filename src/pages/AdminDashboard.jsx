@@ -6,7 +6,6 @@ import DashboardOverview from '../components/admin/DashboardOverview';
 import InventoryTab from '../components/admin/InventoryTab';
 import SalesTab from '../components/admin/SalesTab';
 import SettingsTab from '../components/admin/SettingsTab';
-import LocationsTab from '../components/admin/LocationsTab';
 
 export default function AdminDashboard({ session }) {
   const navigate = useNavigate();
@@ -83,13 +82,7 @@ export default function AdminDashboard({ session }) {
         >
           Sales / Orders
         </button>
-        <button 
-          onClick={() => setActiveTab('locations')} 
-          className={`sidebar-link ${activeTab === 'locations' ? 'active' : ''}`}
-          style={{ width: '100%', textAlign: 'left', border: 'none', background: activeTab === 'locations' ? 'rgba(255,255,255,0.1)' : 'transparent', cursor: 'pointer', fontSize: '1rem' }}
-        >
-          Locations
-        </button>
+
         <button 
           onClick={() => setActiveTab('settings')} 
           className={`sidebar-link ${activeTab === 'settings' ? 'active' : ''}`}
@@ -103,7 +96,7 @@ export default function AdminDashboard({ session }) {
         {activeTab === 'dashboard' && <DashboardOverview products={products} orders={orders} />}
         {activeTab === 'inventory' && <InventoryTab products={products} loading={loading} onRefresh={fetchData} />}
         {activeTab === 'sales' && <SalesTab onRefresh={fetchData} />}
-        {activeTab === 'locations' && <LocationsTab />}
+
         {activeTab === 'settings' && <SettingsTab />}
       </div>
     </div>

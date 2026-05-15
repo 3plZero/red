@@ -7,8 +7,6 @@ import { supabase } from '../lib/supabase';
 export default function Home() {
   const [selectedCake, setSelectedCake] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [carouselProducts, setCarouselProducts] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [featuredCakes, setFeaturedCakes] = useState([]);
   const [settings, setSettings] = useState({
     hero_title: 'Crafting Sweet Memories',
@@ -36,24 +34,6 @@ export default function Home() {
       const { data: products } = await supabase.from('products').select('*');
       
       if (products) {
-        // Fetch carousel products
-        const carouselIds = [
-          settingsObj.carousel_product_1,
-          settingsObj.carousel_product_2,
-          settingsObj.carousel_product_3
-        ].filter(id => id && id !== '');
-
-        let carouselItems = products.filter(p => carouselIds.includes(p.id.toString()));
-        
-        // Ensure we have at least 3 for the effect, fallback to first 3 if none set
-        if (carouselItems.length === 0) {
-          carouselItems = products.slice(0, 3);
-        } else if (carouselItems.length < 3) {
-          carouselItems = [...carouselItems, ...products.slice(0, 3 - carouselItems.length)];
-        }
-        
-        setCarouselProducts(carouselItems);
-
         // Set featured products
         const featuredIds = (settingsObj.featured_products || '').split(',').map(id => id.trim());
         const featured = products.filter(p => featuredIds.includes(p.id.toString()));
@@ -65,16 +45,6 @@ export default function Home() {
       setLoading(false);
     }
   }
-
-  useEffect(() => {
-    if (carouselProducts.length > 0) {
-      const speed = parseInt(settings.carousel_speed) || 3000;
-      const interval = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % carouselProducts.length);
-      }, speed);
-      return () => clearInterval(interval);
-    }
-  }, [carouselProducts.length, settings.carousel_speed]);
 
   if (loading) return <div className="container" style={{padding: '5rem', textAlign: 'center'}}>Loading...</div>;
 
@@ -97,30 +67,13 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="hero-visual carousel-container">
+          <div className="hero-visual">
             <div className="hero-visual-bg"></div>
-            {carouselProducts.map((p, idx) => {
-              // Calculate relative positions for the shuffle effect
-              let position = (idx - currentIndex + carouselProducts.length) % carouselProducts.length;
-              
-              // We want 3 products: 0 (center), 1 (right/next), 2 (left/prev)
-              let className = "carousel-item";
-              if (position === 0) className += " active";
-              else if (position === 1) className += " next";
-              else className += " prev";
-
-              return (
-                <div key={p.id} className={className} onClick={() => setSelectedCake(p)}>
-                  <img src={p.image_url} alt={p.name} />
-                  {position === 0 && (
-                    <div className="item-info">
-                      <h3>{p.name}</h3>
-                      <button className="btn btn-yellow btn-sm">View Details</button>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+            {featuredCakes.length > 0 && (
+              <div className="hero-main-cake" onClick={() => setSelectedCake(featuredCakes[0])}>
+                <img src={featuredCakes[0].image_url} alt={featuredCakes[0].name} style={{ width: '100%', height: 'auto', transform: 'rotate(-5deg)' }} />
+              </div>
+            )}
           </div>
         </div>
       </section>

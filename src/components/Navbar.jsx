@@ -83,7 +83,6 @@ export default function Navbar({ session }) {
                 <li><Link to="/" className="nav-link">Home</Link></li>
                 <li><Link to="/menu" className="nav-link">Menu</Link></li>
                 <li><Link to="/orders" className="nav-link" onClick={handleOrdersClick}>My Orders</Link></li>
-                <li><Link to="/locations" className="nav-link">Locations</Link></li>
               </>
             )}
           </ul>

@@ -12,11 +12,7 @@ export default function SettingsTab() {
     hero_title: '',
     hero_description: '',
     hero_product_id: '',
-    featured_products: '',
-    carousel_product_1: '',
-    carousel_product_2: '',
-    carousel_product_3: '',
-    carousel_speed: '3000'
+    featured_products: ''
   });
 
   useEffect(() => {
@@ -151,73 +147,7 @@ export default function SettingsTab() {
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '1.5rem' }}>
-            <div className="form-group">
-              <label className="form-label" style={{ fontWeight: '600', display: 'block', marginBottom: '0.5rem' }}>Carousel Product 1</label>
-              <select 
-                className="form-control" 
-                name="carousel_product_1"
-                value={settings.carousel_product_1}
-                onChange={handleChange}
-                style={{ width: '100%', padding: '0.75rem 1rem', border: '2px solid #eaeaea', borderRadius: '12px', background: '#fff' }}
-              >
-                <option value="">Select a product</option>
-                {products.map(p => (
-                  <option key={p.id} value={p.id}>{p.name}</option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <label className="form-label" style={{ fontWeight: '600', display: 'block', marginBottom: '0.5rem' }}>Carousel Product 2</label>
-              <select 
-                className="form-control" 
-                name="carousel_product_2"
-                value={settings.carousel_product_2}
-                onChange={handleChange}
-                style={{ width: '100%', padding: '0.75rem 1rem', border: '2px solid #eaeaea', borderRadius: '12px', background: '#fff' }}
-              >
-                <option value="">Select a product</option>
-                {products.map(p => (
-                  <option key={p.id} value={p.id}>{p.name}</option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group">
-              <label className="form-label" style={{ fontWeight: '600', display: 'block', marginBottom: '0.5rem' }}>Carousel Product 3</label>
-              <select 
-                className="form-control" 
-                name="carousel_product_3"
-                value={settings.carousel_product_3}
-                onChange={handleChange}
-                style={{ width: '100%', padding: '0.75rem 1rem', border: '2px solid #eaeaea', borderRadius: '12px', background: '#fff' }}
-              >
-                <option value="">Select a product</option>
-                {products.map(p => (
-                  <option key={p.id} value={p.id}>{p.name}</option>
-                ))}
-              </select>
-            </div>
-          </div>
 
-          <div className="form-group" style={{ marginBottom: '1.5rem' }}>
-            <label className="form-label" style={{ fontWeight: '600', display: 'block', marginBottom: '0.5rem' }}>
-              Shuffle Speed: {settings.carousel_speed / 1000}s
-            </label>
-            <input 
-              type="range" 
-              name="carousel_speed"
-              min="1000" 
-              max="10000" 
-              step="500"
-              value={settings.carousel_speed}
-              onChange={handleChange}
-              style={{ width: '100%', accentColor: 'var(--primary-red)' }}
-            />
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#666', marginTop: '0.5rem' }}>
-              <span>Fast (1s)</span>
-              <span>Slow (10s)</span>
-            </div>
-          </div>
 
           <div className="form-group" style={{ marginBottom: '2.5rem' }}>
             <label className="form-label" style={{ fontWeight: '600', display: 'block', marginBottom: '0.5rem' }}>Featured Creations (Select products to show on home page)</label>

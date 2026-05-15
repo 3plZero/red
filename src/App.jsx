@@ -7,7 +7,6 @@ import AdminDashboard from './pages/AdminDashboard';
 import { useEffect, useState } from 'react';
 import { supabase } from './lib/supabase';
 
-import Locations from './pages/Locations';
 import Orders from './pages/Orders';
 
 function App() {
@@ -33,7 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<Menu />} />
-        <Route path="/locations" element={<Locations />} />
+
         <Route path="/orders" element={<Orders />} />
         <Route path="/login" element={<Login session={session} />} />
         <Route path="/admin" element={<AdminDashboard session={session} />} />
